@@ -1,0 +1,22 @@
+<h4>Add a service</h4>
+<form [formGroup]="servicesFormGroup" (ngSubmit)="addService()">
+  <mat-form-field floatLabel="always" class="smaller-input">
+    <input matInput type="number" min="1" step="1" formControlName="setting" placeholder="Setting" />
+  </mat-form-field>
+  <mat-form-field  floatLabel="always"  class="small-input">
+    <input matInput type="time" class="time-input" formControlName="start" placeholder="Start Time" />
+  </mat-form-field>
+  <mat-form-field  floatLabel="always"  class="small-input">
+    <input matInput type="time" class="time-input" formControlName="end" placeholder="End Time" />
+  </mat-form-field>
+  <mat-form-field  floatLabel="always"  class="smaller-input">
+    <input matInput placeholder="Minutes" formControlName="minutes" required>
+  </mat-form-field>
+  <mat-form-field  floatLabel="always"  class="smaller-input">
+    <input matInput placeholder="Units" formControlName="units" required>
+  </mat-form-field>
+  <mat-slide-toggle formControlName="onBehalf">On behalf</mat-slide-toggle>
+  <button mat-mini-fab color="warn">
+    <mat-icon>add</mat-icon>
+  </button>
+</form>

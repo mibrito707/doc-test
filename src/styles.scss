@@ -1,7 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
+
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+html,
+body {
   margin: 0;
   padding: 0;
-
   height: 100%;
+}
+
+mat-form-field,
+mat-slide-toggle {
+  margin-right: 1rem;
+}
+
+mat-form-field.small-input {
+  width: 120px;
+}
+
+mat-form-field.smaller-input {
+  width: 60px;
+}
+
+td.mat-cell {
+  padding-left: 2rem;
 }

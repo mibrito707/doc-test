@@ -1,0 +1,36 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="domainFG">
+    <form [formGroup]="domainFG">
+      <ng-template matStepLabel>Domain</ng-template>
+      <mat-radio-group formControlName="domain" class="vertical-radio-group">
+        <mat-radio-button *ngFor="let domainObj of (domain | async)" [value]="domainObj.id" class="radio-button-element">
+          {{domainObj.description}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div>
+        <button mat-raised-button matStepperNext color="accent">Select Problem</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="problemFG">
+    <form [formGroup]="problemFG">
+      <ng-template matStepLabel>Problem</ng-template>
+      <mat-radio-group formControlName="problem" class="vertical-radio-group">
+        <mat-radio-button *ngFor="let domainObj of domain" [value]="domainObj.id" class="radio-button-element">
+          {{domainObj.value}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div>
+        <button mat-raised-button matStepperNext color="accent">Select Problem</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

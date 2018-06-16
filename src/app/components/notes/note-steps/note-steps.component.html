@@ -1,0 +1,49 @@
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="generalFormGroup">
+    <form [formGroup]="generalFormGroup">
+      <ng-template matStepLabel>General</ng-template>
+      <mat-form-field>
+        <input type="text" placeholder="Case number" aria-label="Case" matInput formControlName="case" [matAutocomplete]="autoCase">
+        <mat-autocomplete #autoCase="matAutocomplete">
+          <mat-option *ngFor="let option of filteredCases | async" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="small-input">
+        <input type="text" matInput [matDatepicker]="notedate" placeholder="Note Date" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="notedate"></mat-datepicker-toggle>
+        <mat-datepicker #notedate disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [completed]="!!noteServices.length">
+    <ng-template matStepLabel>Services</ng-template>
+    <app-service-note-viewer [noteServices]="noteServicesViewer" (removeServiceNote)="handleRemoveServiceNote($event)"></app-service-note-viewer>
+    <app-add-service-note (newServiceNote)="addServiceNote($event)"></app-add-service-note>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Domains -> Short term goals</ng-template>
+    <app-add-service-goals [domain]="filteredDomain"></app-add-service-goals>
+    <mat-divider></mat-divider>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
